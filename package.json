@@ -1,0 +1,123 @@
+{
+  "name": "sotlas",
+  "displayName": "Sotlas Programming Language",
+  "publisher": "hiagopinho",
+  "author": "Hiago Pinho",
+  "description": "Official support for the Sotlas programming language: from low-level systems (bare-metal, drivers, kernels) to high-level applications, game engines, and tools. Syntax highlighting, native diagnostics, outline, and hover.",
+  "version": "0.5.2",
+  "icon": "./icons/sotlas-icon.png",
+  "engines": {
+    "vscode": "^1.60.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "license": "Apache-2.0 WITH LLVM-exception",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Sotlas/vscode-sotlas.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Sotlas/vscode-sotlas/issues"
+  },
+  "homepage": "https://sotlas.org",
+  "keywords": ["sotlas", "systems", "game-engine", "compiler", "language", "bare-metal", "general-purpose"],
+  "main": "./out/extension.js",
+  "activationEvents": [
+    "onLanguage:sotlas"
+  ],
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "package": "vsce package"
+  },
+  "contributes": {
+    "languages": [
+      {
+        "id": "sotlas",
+        "aliases": [
+          "Sotlas",
+          "sotlas"
+        ],
+        "extensions": [
+          ".sotlas",
+          ".sth"
+        ],
+        "configuration": "./language-configuration.json",
+        "icon": {
+          "light": "./icons/sotlas-icon.svg",
+          "dark": "./icons/sotlas-logo.svg"
+        }
+      }
+    ],
+    "grammars": [
+      {
+        "language": "sotlas",
+        "scopeName": "source.sotlas",
+        "path": "./syntaxes/sotlas.tmLanguage.json"
+      }
+    ],
+    "iconThemes": [
+      {
+        "id": "sotlas-icons",
+        "label": "Sotlas File Icons",
+        "path": "./icons/sotlas-icon-theme.json"
+      }
+    ],
+    "commands": [
+      {
+        "command": "sotlas.build",
+        "title": "Sotlas: Compilar Pacote Atual"
+      },
+      {
+        "command": "sotlas.check",
+        "title": "Sotlas: Verificar Tipos e Sintaxe"
+      },
+      {
+        "command": "sotlas.format",
+        "title": "Sotlas: Formatar Arquivo Atual"
+      },
+      {
+        "command": "sotlas.studio",
+        "title": "Sotlas: Abrir Sotlas Studio (Navegador)"
+      },
+      {
+        "command": "sotlas.repl",
+        "title": "Sotlas: Iniciar Terminal Interativo (REPL)"
+      },
+      {
+        "command": "sotlas.dumpWasm",
+        "title": "Sotlas: Emitir WebAssembly (.wat)"
+      },
+      {
+        "command": "sotlas.restartServer",
+        "title": "Sotlas: Reiniciar Servidor de Linguagem (LSP)"
+      }
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "Sotlas Configuration",
+      "properties": {
+        "sotlas.compilerPath": {
+          "type": "string",
+          "default": "sotlas",
+          "description": "Caminho para o binário ou comando executável do compilador Sotlas"
+        },
+        "sotlas.enableExternalLsp": {
+          "type": "boolean",
+          "default": false,
+          "description": "Habilitar servidor LSP externo adicional via processo sotlas lsp (opcional quando o compilador nativo estiver instalado)"
+        }
+      }
+    }
+  },
+  "dependencies": {
+    "vscode-languageclient": "^8.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^16.11.7",
+    "@types/vscode": "^1.60.0",
+    "typescript": "^4.5.4"
+  }
+}
